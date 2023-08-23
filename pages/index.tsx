@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import Header from "@/components/Header";
 import Row from "@/components/Row";
+import useAuth from "@/hooks/useAuth";
 import { Movie } from "@/typings";
 import requests from "@/utils/requests";
 import { Inter } from "next/font/google";
@@ -29,6 +30,10 @@ export default function Home({
   topRated,
   trendingNow,
 }: Props) {
+  const {logout, loading} = useAuth()
+
+  if (loading) return null
+
 
   return (
     <div
