@@ -1,11 +1,14 @@
+import { modalState } from "@/atoms/modalAtom";
 import Banner from "@/components/Banner";
 import Header from "@/components/Header";
+import Modal from "@/components/Modal";
 import Row from "@/components/Row";
 import useAuth from "@/hooks/useAuth";
 import { Movie } from "@/typings";
 import requests from "@/utils/requests";
 import { Inter } from "next/font/google";
 import Head from "next/head";
+import { useRecoilValue } from "recoil";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +33,8 @@ export default function Home({
   topRated,
   trendingNow,
 }: Props) {
-  const {logout, loading} = useAuth()
+  const {loading} = useAuth()
+  const showModal = useRecoilValue(modalState)
 
   if (loading) return null
 
@@ -57,7 +61,7 @@ export default function Home({
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
-      {/* Modal */}
+      {showModal && <Modal />}
     </div>
   );
 }
