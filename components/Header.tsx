@@ -1,30 +1,30 @@
-import useAuth from "@/hooks/useAuth";
-import { BellIcon, SearchIcon } from "@heroicons/react/solid"
+import { BellIcon, ChevronDownIcon, SearchIcon } from "@heroicons/react/solid";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import AccountMenu from "./AccountMenu";
 
 function Header() {
-    const [isScrolled, setIsScrolled] = useState(false)
-    const {logout} = useAuth()
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 0) {
-                setIsScrolled(true)
-            } else {
-                setIsScrolled(false)
-            }
-        }
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
 
-        window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll)
-        }
-    }, [])
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className={`${isScrolled && "bg-[#141414]"}`}>
+    <header className={`${isScrolled && "bg-[#141414]"} transition`}>
       <div className="flex items-center space-x-2 md:space-x-10">
         <img
           src="https://rb.gy/ulxxee"
@@ -34,21 +34,41 @@ function Header() {
         />
 
         <ul className="hidden space-x-4 md:flex">
-            <li className="headerLink">Home</li>
-            <li className="headerLink">TV Shows</li>
-            <li className="headerLink">Movies</li>
-            <li className="headerLink">New & Popular</li>
-            <li className="headerLink">My List</li>
+          <li className="headerLink cursor-not-allowed">Home</li>
+          <li className="headerLink cursor-not-allowed">TV Shows</li>
+          <li className="headerLink cursor-not-allowed">Movies</li>
+          <li className="headerLink cursor-not-allowed">New & Popular</li>
+          <li className="headerLink cursor-not-allowed">My List</li>
         </ul>
       </div>
 
       <div className="flex items-center space-x-4 text-sm font-light">
-        <SearchIcon className="hidden sm:inline h-6 w-6"/>
+        <SearchIcon className="hidden sm:inline h-6 w-6 cursor-not-allowed" />
         <p className="hidden lg:inline">Kids</p>
-        <BellIcon className="h-6 w-6"/>
-        {/* <Link href="/account"> */}
-            <img src="https://rb.gy/g1pwyx" alt="" className="cursor-pointer rounded" onClick={logout}/>
-        {/* </Link> */}
+        <BellIcon className="h-6 w-6 cursor-not-allowed" />
+
+        <div
+          onClick={() => {
+            setShowAccountMenu(!showAccountMenu);
+          }}
+          className="flex cursor-pointer space-x-1/2"
+        >
+          <img src="https://rb.gy/g1pwyx" alt="" className="rounded" />
+          <ChevronDownIcon
+            className={`w-4 ml-1 text-white fill-white transition ${
+              showAccountMenu === true ? "rotate-180" : "rotate-0"
+            }`}
+          />
+          <div
+            className={`${
+              showAccountMenu
+                ? "visible opacity-100 transition-[300ms]"
+                : "collapse opacity-0 transition-[300ms]"
+            }`}
+          >
+            <AccountMenu/>
+          </div>
+        </div>
       </div>
     </header>
   );

@@ -41,7 +41,7 @@ function Banner({ netflixOriginals }: Props) {
       </p>
 
       <div className="flex space-x-3">
-        <button className="bannerButton bg-white text-black">
+        <button className="bannerButton bg-white text-black cursor-not-allowed">
           <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" /> Play
         </button>
         <button className="bannerButton bg-[gray]/70" onClick={() => {
