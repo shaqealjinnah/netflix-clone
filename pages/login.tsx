@@ -59,7 +59,7 @@ function Login() {
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="relative mt-24 py-10 px-6 md:mt-0
-          md:max-w-md md:px-14"
+          md:max-w-md md:min-w-[415px] md:px-14"
           >
           <h1 className="text-4xl font-semibold">
             {variant === "login" ? "Sign In" : "Register"}

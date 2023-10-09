@@ -1,5 +1,6 @@
 import { modalState, movieState } from "@/atoms/modalAtom";
-import { Movie } from "@/typings";
+import { Genre, Movie } from "@/typings";
+import { ChevronDownIcon, PlayIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import { useRecoilState } from "recoil";
 
@@ -7,7 +8,6 @@ interface Props {
   movie: Movie;
   // movie: Movie | DocumentData
 }
-
 
 function Thumbnail({ movie }: Props) {
   const [showModal, setShowModal] = useRecoilState(modalState);
