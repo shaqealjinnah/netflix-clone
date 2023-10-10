@@ -1,12 +1,12 @@
 import { modalState, movieState } from "@/atoms/modalAtom";
 import { Genre, Movie } from "@/typings";
 import { ChevronDownIcon, PlayIcon } from "@heroicons/react/solid";
-import Image from "next/image";
+import { DocumentData } from "firebase/firestore";
+import Image from "next/legacy/image";
 import { useRecoilState } from "recoil";
 
 interface Props {
-  movie: Movie;
-  // movie: Movie | DocumentData
+  movie: Movie | DocumentData
 }
 
 function Thumbnail({ movie }: Props) {
@@ -28,6 +28,7 @@ function Thumbnail({ movie }: Props) {
         }`}
         alt="Thumbnail"
         layout="fill"
+        sizes="(max-width: 767px) min-width: 180px, (min-width: 768px) min-width: 260px"
         className="rounded-sm object-cover md:rounded" style={{opacity: '100'}}
       />
     </div>

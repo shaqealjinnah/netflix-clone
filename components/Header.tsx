@@ -2,6 +2,7 @@ import { BellIcon, ChevronDownIcon, SearchIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import AccountMenu from "./AccountMenu";
+import BasicMenu from "./BasicMenu";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,6 +33,7 @@ function Header() {
           height={100}
           className="cursor-pointer object-contain"
         />
+        <BasicMenu />
 
         <ul className="hidden space-x-4 md:flex">
           <li className="headerLink cursor-not-allowed">Home</li>
@@ -44,7 +46,7 @@ function Header() {
 
       <div className="flex items-center space-x-4 text-sm font-light">
         <SearchIcon className="hidden sm:inline h-6 w-6 cursor-not-allowed" />
-        <p className="hidden lg:inline">Kids</p>
+        <p className="hidden lg:inline cursor-not-allowed">Kids</p>
         <BellIcon className="h-6 w-6 cursor-not-allowed" />
 
         <div
@@ -53,21 +55,7 @@ function Header() {
           }}
           className="flex cursor-pointer space-x-1/2"
         >
-          <img src="https://rb.gy/g1pwyx" alt="" className="rounded" />
-          <ChevronDownIcon
-            className={`w-4 ml-1 text-white fill-white transition ${
-              showAccountMenu === true ? "rotate-180" : "rotate-0"
-            }`}
-          />
-          <div
-            className={`${
-              showAccountMenu
-                ? "visible opacity-100 transition-[300ms]"
-                : "collapse opacity-0 transition-[300ms]"
-            }`}
-          >
             <AccountMenu/>
-          </div>
         </div>
       </div>
     </header>
