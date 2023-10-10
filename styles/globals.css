@@ -50,10 +50,6 @@
     @apply !block !w-60 !py-3.5 !text-center !text-sm !font-light !text-[#b3b3b3] !transition !duration-200 first:cursor-default first:!font-normal first:!text-white hover:!bg-[#11100F];
   }
 
-  .account {
-    @apply md:hidden;
-  }
-
   .account .MuiPaper-root {
     @apply !absolute !w-52 !right-0 !rounded-none !border !border-[gray] !bg-black !text-white;
   }

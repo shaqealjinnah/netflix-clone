@@ -17,7 +17,7 @@ export default function AccountMenu() {
     }
   
     return (
-      <div className="md:!hidden">
+      <div>
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}

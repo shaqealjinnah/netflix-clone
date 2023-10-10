@@ -47,7 +47,7 @@ function Header() {
       <div className="flex items-center space-x-4 text-sm font-light">
         <SearchIcon className="hidden sm:inline h-6 w-6 cursor-not-allowed" />
         <p className="hidden lg:inline cursor-not-allowed">Kids</p>
-        <BellIcon className="h-6 w-6 cursor-not-allowed" />
+        <BellIcon className="hidden sm:inline h-6 w-6 cursor-not-allowed" />
 
         <div
           onClick={() => {
