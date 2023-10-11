@@ -36,7 +36,7 @@ function Header() {
         <BasicMenu />
 
         <ul className="hidden space-x-4 md:flex">
-          <li className="headerLink cursor-not-allowed">Home</li>
+          <li className="headerLink cursor-default">Home</li>
           <li className="headerLink cursor-not-allowed">TV Shows</li>
           <li className="headerLink cursor-not-allowed">Movies</li>
           <li className="headerLink cursor-not-allowed">New & Popular</li>

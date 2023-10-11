@@ -55,11 +55,11 @@ function Login() {
         width={150}
         height={150}
       />
-      <div className="bg-black/75 rounded">
+      <div className="bg-black/75 rounded-lg">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="relative mt-24 py-10 px-6 md:mt-0
-          md:max-w-md md:min-w-[415px] md:px-14"
+          md:max-w-md md:min-w-[440px] md:px-14"
           >
           <h1 className="text-4xl font-semibold">
             {variant === "login" ? "Sign In" : "Register"}
@@ -164,19 +164,19 @@ function Login() {
             >
             {variant === "login" ? "Login" : "Sign Up"}
           </button>
+            <div className="text-[gray] mt-8">
+            {variant === "login"
+              ? "First time using Netflix? "
+              : "Already have an account? "}
+            <button
+              type="submit"
+              className="text-white hover:underline"
+              onClick={toggleVariant}
+              >
+              {variant === "login" ? "Create an account" : "Sign in"}
+            </button>
+          </div>
         </form>
-        <div className="text-[gray] px-6 md:px-14 mb-6">
-          {variant === "login"
-            ? "First time using Netflix? "
-            : "Already have an account? "}
-          <button
-            type="submit"
-            className="text-white hover:underline"
-            onClick={toggleVariant}
-            >
-            {variant === "login" ? "Create an account" : "Sign in"}
-          </button>
-        </div>
       </div>
     </div>
   );
