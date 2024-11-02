@@ -1,6 +1,9 @@
+import { auth } from "@/firebase";
 import useAuth from "@/hooks/useAuth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Head from "next/head";
 import Image from "next/legacy/image";
+import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -13,6 +16,7 @@ function Login() {
   const [login, setLogin] = useState(false);
   const { signIn, signUp } = useAuth();
   const [variant, setVariant] = useState("login");
+  const router = useRouter()
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -33,17 +37,27 @@ function Login() {
     }
   };
 
+  async function handleGuestSignIn() {
+    try {
+      await signInWithEmailAndPassword(auth, "user110471@gmail.com", "123456");
+      console.log("Guest login successful");
+      router.push("/")
+    } catch (error) {
+      console.error("Failed to sign in as guest:", error);
+    }
+  }
+
   return (
     <div
       className="relative flex h-screen w-screen flex-col bg-black md:items-center 
     md:justify-center md:bg-transparent"
     >
       <Head>
-        <title>Netflix</title>
+        <title>Shaqeal's Netflix</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image
-        src="https://rb.gy/p2hphi"
+        src="/banner.jpg"
         layout="fill"
         className="-z-10 !hidden opacity-60 sm:!inline"
         objectFit="cover"
@@ -60,7 +74,7 @@ function Login() {
           onSubmit={handleSubmit(onSubmit)}
           className="relative mt-24 py-10 px-6 md:mt-0
           md:max-w-md md:min-w-[440px] md:px-14"
-          >
+        >
           <h1 className="text-4xl font-semibold">
             {variant === "login" ? "Sign In" : "Register"}
           </h1>
@@ -85,7 +99,7 @@ function Login() {
               peer
               invalid:border-b-1"
               {...register("email", { required: true })}
-              />
+            />
             <label
               className="
               absolute 
@@ -103,11 +117,13 @@ function Login() {
               peer-placeholder-shown:translate-y-0 
               peer-focus:scale-75
               peer-focus:-translate-y-3"
-              >
+            >
               Email
             </label>
             <p className="text-[13px] font-light  text-orange-500 mt-4">
-              {variant === 'login' ? (errors.email && 'Please enter a valid email.') : null}
+              {variant === "login"
+                ? errors.email && "Please enter a valid email."
+                : null}
             </p>
           </div>
           <div className="relative">
@@ -132,8 +148,9 @@ function Login() {
               invalid:border-b-1
               "
               {...register("password", { required: true })}
-              />
-            <label className="
+            />
+            <label
+              className="
               absolute 
               text-base
               text-zinc-400
@@ -148,11 +165,15 @@ function Login() {
               peer-placeholder-shown:scale-100 
               peer-placeholder-shown:translate-y-0 
               peer-focus:scale-75
-              peer-focus:-translate-y-3">
+              peer-focus:-translate-y-3"
+            >
               Password
             </label>
             <p className="p-1 text-[13px] font-light  text-orange-500 mt-4">
-            {variant === 'login' ? (errors.password && 'Your password must contain between 4 and 60 characters.') : null}
+              {variant === "login"
+                ? errors.password &&
+                  "Your password must contain between 4 and 60 characters."
+                : null}
             </p>
           </div>
 
@@ -161,10 +182,18 @@ function Login() {
             onClick={
               variant === "login" ? () => setLogin(true) : () => setLogin(false)
             }
-            >
+          >
             {variant === "login" ? "Login" : "Sign Up"}
           </button>
-            <div className="text-[gray] mt-8">
+          <p className="text-center my-4 font-semibold">Or</p>
+          <button
+            type="button"
+            onClick={handleGuestSignIn}
+            className="z-10 w-full cursor-pointer rounded bg-white text-black py-3 font-semibold"
+          >
+            Guest Login
+          </button>
+          <div className="text-[gray] mt-8">
             {variant === "login"
               ? "First time using Netflix? "
               : "Already have an account? "}
@@ -172,7 +201,7 @@ function Login() {
               type="submit"
               className="text-white hover:underline"
               onClick={toggleVariant}
-              >
+            >
               {variant === "login" ? "Create an account" : "Sign in"}
             </button>
           </div>
