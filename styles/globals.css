@@ -32,7 +32,35 @@
   .planBox {
     @apply relative mx-1.5 flex h-20 bg-[#e50914] w-[calc(100%/3)] cursor-default items-center justify-center rounded-sm font-semibold shadow after:absolute after:top-full after:left-1/2 after:block after:-translate-x-1/2 after:border-8 after:border-b-0 after:border-transparent after:border-t-[#e50914] after:content-[""] md:h-32 lg:mx-8;
   }
-  
+
+  .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(229, 9, 20, 0.2);
+    border-top-color: #e50914; 
+    border-radius: 50%;
+    animation: spin 1s linear infinite; 
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg); 
+    }
+  }
+
   /* MUI Menu */
   .menu {
     @apply md:hidden;
